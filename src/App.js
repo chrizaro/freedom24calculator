@@ -69,7 +69,7 @@ function App() {
   return (
     <div>
       <div>
-        <label>Fees Plan:</label>
+        <label>Πλάνο προμηθειών:</label>
         <label>
           <input
             type="radio"
@@ -111,28 +111,46 @@ function App() {
         </label>
       </div>
       <div>
-        <label>Stock price: </label>
+        <label>Τιμή μετοχής: </label>
         <input
           type="text"
           value={entryPoint}
+		  placeholder="υποδιαστολή είναι η ."
           onChange={handleEntryPointChange}
         />
       </div>
       <div>
-        <label>Quantity: </label>
+        <label>Ποσότητα: </label>
         <input type="text" value={quantity} onChange={handleQuantityChange} />
       </div>
-      <div>
+	  {(plan === "all" && currency === "eur") &&(	
+		<div>
         <label>Exchange rate: 1 EUR is </label>
         <input
           type="text"
           value={exchangeRate}
+		  placeholder="υποδιαστολή είναι η ."
           onChange={handleExchangeRateChange}
         />
-        <label> USD (πχ 1€=1.0890$)(χρειάζεται μόνο αν fee plan και currency είναι διαφορετικό currency)</label>
-      </div>
-      <button onClick={calculateSomething}>Calculate</button>
-      <p>Result (currency is based on Plan): {result}</p>
+        <label> USD (πχ 1€=1.0890$)</label>
+		</div>)
+		}
+		
+		{(plan === "smart" && currency === "usd") &&(	
+		<div>
+        <label>Exchange rate: 1 USD is </label>
+        <input
+          type="text"
+          value={exchangeRate}
+		  placeholder="υποδιαστολή είναι η ."
+          onChange={handleExchangeRateChange}
+        />
+        <label> EUR (πχ $1=0.90€)</label>
+		</div>)
+		}
+	  
+      <button onClick={calculateSomething}>Υπολογισμός προμήθειας</button>
+      <p>Προμήθεια (currency is based on Plan): {result}</p>
     </div>
   );
 }
